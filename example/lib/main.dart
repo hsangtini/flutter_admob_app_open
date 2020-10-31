@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'dart:async';
-
-import 'package:flutter/services.dart';
 import 'package:flutter_admob_app_open/flutter_admob_app_open.dart';
 
 void main() async {
@@ -14,9 +11,20 @@ void main() async {
   /// Replace your admob app open ad unit id
   final appAppOpenAdUnitId = FlutterAdmobAppOpen.testAppOpenAdId;
 
+  MobileAdTargetingInfo targetingInfo = MobileAdTargetingInfo(
+    keywords: <String>['flutterio', 'beautiful apps'],
+    contentUrl: 'https://flutter.io',
+    birthday: DateTime.now(),
+    childDirected: false,
+    designedForFamilies: false,
+    gender: MobileAdGender.male, // or MobileAdGender.female, MobileAdGender.unknown
+    testDevices: <String>[], // Android emulators are considered test devices
+  );
+
   await FlutterAdmobAppOpen.instance.initialize(
     appId: admobAppId,
     appAppOpenAdUnitId: appAppOpenAdUnitId,
+    targetingInfo: targetingInfo,
   );
 
   runApp(MyApp());

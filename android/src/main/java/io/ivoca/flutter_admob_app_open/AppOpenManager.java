@@ -16,6 +16,7 @@ import com.google.android.gms.ads.LoadAdError;
 import com.google.android.gms.ads.appopen.AppOpenAd;
 
 import java.util.Date;
+import java.util.Map;
 
 import static androidx.lifecycle.Lifecycle.Event.ON_START;
 
@@ -34,17 +35,22 @@ public class AppOpenManager implements LifecycleObserver,Application.ActivityLif
 
     private final String adUnitId;
 
+    private final Map<String, Object> targetingInfo;
+
     /** Constructor */
-    public AppOpenManager(Application myApplication, String adUnitId) {
+    public AppOpenManager(Application myApplication, String adUnitId, Map<String, Object> targetingInfo) {
         this.myApplication = myApplication;
         this.adUnitId = adUnitId;
+        this.targetingInfo = targetingInfo;
         this.myApplication.registerActivityLifecycleCallbacks(this);
         ProcessLifecycleOwner.get().getLifecycle().addObserver(this);
     }
 
     /** Creates and returns ad request. */
     private AdRequest getAdRequest() {
-        return new AdRequest.Builder().build();
+
+        AdRequestBuilderFactory factory = new AdRequestBuilderFactory(targetingInfo);
+        return factory.createAdRequestBuilder().build();
     }
 
     /** Utility method that checks if ad exists and can be shown. */

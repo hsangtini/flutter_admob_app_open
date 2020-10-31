@@ -1,4 +1,5 @@
 #import "FlutterAdmobAppOpenPlugin.h"
+#import "FLTRequestFactoryCustom.h"
 
 @implementation FlutterAdmobAppOpenPlugin
 + (void)registerWithRegistrar:(NSObject<FlutterPluginRegistrar>*)registrar {
@@ -22,10 +23,13 @@
        
         NSString *appId = (NSString *)call.arguments[@"appId"];
         NSString *appAppOpenAdUnitId = (NSString *)call.arguments[@"appAppOpenAdUnitId"];
+        NSDictionary *targetingInfo = (NSDictionary *)call.arguments[@"targetingInfo"];
         
         
         self.appId = appId;
         self.appAppOpenAdUnitId = appAppOpenAdUnitId;
+        self.targetingInfo = targetingInfo;
+        
         if (appId == nil || [appId  isEqual: @""]) {
             result([FlutterError errorWithCode:@"no_app_id" message:@"a null or empty AdMob appId was provided" details:nil]);
             return;
@@ -51,9 +55,10 @@
     }
     
     self.appOpenAd = nil;
-    
+
+    FLTRequestFactoryCustom *factory = [[FLTRequestFactoryCustom alloc] initWithTargetingInfo:(NSDictionary *) self.targetingInfo];
   [GADAppOpenAd loadWithAdUnitID:appAppOpenAdUnitId
-                         request:[GADRequest request]
+                         request:[factory createRequest]
                      orientation:UIInterfaceOrientationPortrait
                completionHandler:^(GADAppOpenAd *_Nullable appOpenAd, NSError *_Nullable error) {
                  if (error) {

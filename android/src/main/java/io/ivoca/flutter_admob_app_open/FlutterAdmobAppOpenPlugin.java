@@ -1,5 +1,6 @@
 package io.ivoca.flutter_admob_app_open;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
@@ -7,6 +8,8 @@ import android.content.Context;
 import androidx.annotation.NonNull;
 
 import com.google.android.gms.ads.MobileAds;
+
+import java.util.Map;
 
 import io.flutter.embedding.engine.plugins.FlutterPlugin;
 import io.flutter.embedding.engine.plugins.activity.ActivityPluginBinding;
@@ -29,6 +32,8 @@ public class FlutterAdmobAppOpenPlugin implements FlutterPlugin, MethodCallHandl
   private Context applicationContext;
   private AppOpenManager appOpenManager;
 
+  private static boolean hasAppOpenManager = false;
+
   @Override
   public void onAttachedToEngine(@NonNull FlutterPluginBinding flutterPluginBinding) {
     channel = new MethodChannel(flutterPluginBinding.getBinaryMessenger(), "flutter_admob_app_open");
@@ -42,16 +47,19 @@ public class FlutterAdmobAppOpenPlugin implements FlutterPlugin, MethodCallHandl
     if (call.method.equals("initialize")) {
 
       String appId = call.argument("appId");
-      String appAppOpenAdUnitId = call.argument("appAppOpenAdUnitId");
       if (appId == null || appId.isEmpty()) {
         result.error("no_app_id", "a null or empty AdMob appId was provided", null);
         return;
       }
+
+      String appAppOpenAdUnitId = call.argument("appAppOpenAdUnitId");
+      final Map<String, Object> targetingInfo = call.argument("targetingInfo");
       
       MobileAds.initialize(applicationContext, appId);
 
-      if(appAppOpenAdUnitId != null && appOpenManager == null) {
-        this.appOpenManager = new AppOpenManager((Application) applicationContext, appAppOpenAdUnitId);
+      if(appAppOpenAdUnitId != null && appOpenManager == null && !hasAppOpenManager) {
+        this.appOpenManager = new AppOpenManager((Application) applicationContext, appAppOpenAdUnitId, targetingInfo);
+        hasAppOpenManager = true;
       }
 
       result.success(Boolean.TRUE);

@@ -7,6 +7,8 @@
 @property(nonatomic) NSDate *loadTime;
 @property(nonatomic, retain) NSString *appId;
 @property(nonatomic, retain) NSString *appAppOpenAdUnitId;
+@property(nonatomic, retain) NSDictionary *targetingInfo;
+
 
 - (void)requestAppOpenAd;
 - (void)tryToPresentAd;

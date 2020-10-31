@@ -1,6 +1,6 @@
 name: flutter_admob_app_open
 description: Admob App Open ads for flutter
-version: 0.0.4
+version: 0.0.5
 author: ivoca.io
 homepage: https://github.com/hsangtini/flutter_admob_app_open
 
@@ -11,6 +11,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  firebase_admob: ^0.10.1
 
 dev_dependencies:
   flutter_test:
