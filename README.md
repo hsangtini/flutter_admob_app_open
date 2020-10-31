@@ -1,9 +1,33 @@
-# flutter_admob_app_open
 
-Admob App Open ads for flutter
+# Flutter Admob App Open
 
-https://developers.google.com/admob/ios/app-open-ads
-https://github.com/marketplace/actions/publish-dart-flutter-package
+Flutter bridge to Admob App Open Beta.
+
+Supports using Admob App Open Beta.
+
+![](https://developers.google.com/admob/images/app-open-ad.png)
+
+## Supported platforms
+
+- Android
+- iOS comming soon
+
+## Example Usage
+
+```dart
+void main() async {
+
+  /// Replace your admob app ID
+  final admobAppId = FlutterAdmobAppOpen.testAppId;
+
+  /// Replace your admob app open ad unit id
+  final appAppOpenAdUnitId = FlutterAdmobAppOpen.testAppOpenAdId;
+
+  await FlutterAdmobAppOpen.instance.initialize(appId: admobAppId, appAppOpenAdUnitId: appAppOpenAdUnitId,);
+
+  runApp(MyApp());
+}
+```
 
 ## Getting Started
 
