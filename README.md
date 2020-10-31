@@ -2,6 +2,9 @@
 
 Admob App Open ads for flutter
 
+https://developers.google.com/admob/ios/app-open-ads
+https://github.com/marketplace/actions/publish-dart-flutter-package
+
 ## Getting Started
 
 This project is a starting point for a Flutter
