@@ -1,7 +1,8 @@
 name: flutter_admob_app_open
 description: Admob App Open ads for flutter
-version: 0.0.2
-homepage: https://github.com/hsangtini/flutter_admob_app_open/tree/master
+version: 0.0.4
+author: ivoca.io
+homepage: https://github.com/hsangtini/flutter_admob_app_open
 
 environment:
   sdk: ">=2.7.0 <3.0.0"

@@ -1,45 +1,59 @@
 #import "FlutterAdmobAppOpenPlugin.h"
-#if __has_include(<flutter_admob_app_open/flutter_admob_app_open-Swift.h>)
-#import <flutter_admob_app_open/flutter_admob_app_open-Swift.h>
-#else
-// Support project import fallback if the generated compatibility header
-// is not copied when this plugin is created as a library.
-// https://forums.swift.org/t/swift-static-libraries-dont-copy-generated-objective-c-header/19816
-#import "flutter_admob_app_open-Swift.h"
-#endif
 
 @implementation FlutterAdmobAppOpenPlugin
 + (void)registerWithRegistrar:(NSObject<FlutterPluginRegistrar>*)registrar {
-  [SwiftFlutterAdmobAppOpenPlugin registerWithRegistrar:registrar];
+    FlutterMethodChannel* channel = [FlutterMethodChannel
+        methodChannelWithName:@"flutter_admob_app_open"
+              binaryMessenger:[registrar messenger]];
+    FlutterAdmobAppOpenPlugin* instance = [[FlutterAdmobAppOpenPlugin alloc] init];
+    [registrar addMethodCallDelegate:instance channel:channel];
+    [registrar addApplicationDelegate:instance];
+    
 }
 
 - (void)handleMethodCall:(FlutterMethodCall *)call result:(FlutterResult)result {
+    
+    
+    
     if ([@"getPlatformVersion" isEqualToString:call.method]) {
         result([@"iOS "
                 stringByAppendingString:[[UIDevice currentDevice] systemVersion]]);
     } else if ([@"initialize" isEqualToString:call.method]) {
-        NSString *appId = myArgs["appId"] as? String,
-        NSString *appAppOpenAdUnitId = myArgs["appAppOpenAdUnitId"] as? String,
-        self.appId = appId
-        self.appAppOpenAdUnitId = appAppOpenAdUnitId
-        if (appId == null || appId.isEmpty()) {
-            result(FlutterError(code: "no_app_id", message: "a null or empty AdMob appId was provided", details: nil))
-            return
+       
+        NSString *appId = (NSString *)call.arguments[@"appId"];
+        NSString *appAppOpenAdUnitId = (NSString *)call.arguments[@"appAppOpenAdUnitId"];
+        
+        
+        self.appId = appId;
+        self.appAppOpenAdUnitId = appAppOpenAdUnitId;
+        if (appId == nil || [appId  isEqual: @""]) {
+            result([FlutterError errorWithCode:@"no_app_id" message:@"a null or empty AdMob appId was provided" details:nil]);
+            return;
         }
         [GADMobileAds configureWithApplicationID:appId];
-        result(true)
+        [self requestAppOpenAd];
+        result([NSNumber numberWithBool:YES]);
     } else {
         result(FlutterMethodNotImplemented);
     }
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
-  [self tryToPresentAd];
+    [self tryToPresentAd:application.keyWindow];
 }
 
 - (void)requestAppOpenAd {
-  self.appOpenAd = nil;
-  [GADAppOpenAd loadWithAdUnitID:self.appAppOpenAdUnitId
+
+    NSString *appAppOpenAdUnitId = (NSString *) self.appAppOpenAdUnitId;
+    NSLog(@"%@", appAppOpenAdUnitId);
+    
+    if(appAppOpenAdUnitId == nil) {
+        return;
+    }
+    
+    self.appOpenAd = nil;
+    
+  [GADAppOpenAd loadWithAdUnitID:appAppOpenAdUnitId
                          request:[GADRequest request]
                      orientation:UIInterfaceOrientationPortrait
                completionHandler:^(GADAppOpenAd *_Nullable appOpenAd, NSError *_Nullable error) {
@@ -47,6 +61,7 @@
                    NSLog(@"Failed to load app open ad: %@", error);
                    return;
                  }
+                
                  self.appOpenAd = appOpenAd;
                  self.appOpenAd.fullScreenContentDelegate = self;
                  self.loadTime = [NSDate date];
@@ -82,11 +97,11 @@
   return intervalInHours < n;
 }
 
-- (void)tryToPresentAd {
+- (void)tryToPresentAd:(UIWindow *)window {
   GADAppOpenAd *ad = self.appOpenAd;
   self.appOpenAd = nil;
   if (ad && [self wasLoadTimeLessThanNHoursAgo:4]) {
-    UIViewController *rootController = self.window.rootViewController;
+    UIViewController *rootController = window.rootViewController;
     [ad presentFromRootViewController:rootController];
 
   } else {

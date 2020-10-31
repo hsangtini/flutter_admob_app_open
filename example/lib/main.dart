@@ -6,13 +6,18 @@ import 'package:flutter_admob_app_open/flutter_admob_app_open.dart';
 
 void main() async {
 
+  WidgetsFlutterBinding.ensureInitialized();
+
   /// Replace your admob app ID
   final admobAppId = FlutterAdmobAppOpen.testAppId;
 
   /// Replace your admob app open ad unit id
   final appAppOpenAdUnitId = FlutterAdmobAppOpen.testAppOpenAdId;
 
-  await FlutterAdmobAppOpen.instance.initialize(appId: admobAppId, appAppOpenAdUnitId: appAppOpenAdUnitId,);
+  await FlutterAdmobAppOpen.instance.initialize(
+    appId: admobAppId,
+    appAppOpenAdUnitId: appAppOpenAdUnitId,
+  );
 
   runApp(MyApp());
 }
@@ -23,7 +28,6 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-
   @override
   void initState() {
     super.initState();

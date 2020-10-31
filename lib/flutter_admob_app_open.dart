@@ -1,8 +1,7 @@
-
 import 'dart:async';
 import 'dart:io';
 
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 
 class FlutterAdmobAppOpen {
@@ -11,7 +10,6 @@ class FlutterAdmobAppOpen {
 
   static const MethodChannel _channel =
       const MethodChannel('flutter_admob_app_open');
-
 
   /// {@macro firebase_admob.testAdUnitId}
   static final String testAppId = Platform.isAndroid
@@ -27,10 +25,12 @@ class FlutterAdmobAppOpen {
 
   /// Initialize this plugin for the AdMob app specified by `appId`.
   /// If appAppOpenAdUnitId null, App Open ads will disable
-  Future<bool> initialize(
-      {@required String appId,
-        String appAppOpenAdUnitId,}) {
+  Future<bool> initialize({
+    @required String appId,
+    String appAppOpenAdUnitId,
+  }){
     assert(appId != null && appId.isNotEmpty);
+
     return _channel.invokeMethod<bool>("initialize", <String, dynamic>{
       'appId': appId,
       'appAppOpenAdUnitId': appAppOpenAdUnitId,

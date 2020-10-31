@@ -9,13 +9,15 @@ Pod::Spec.new do |s|
   s.description      = <<-DESC
 Admob App Open ads for flutter
                        DESC
-  s.homepage         = 'http://example.com'
+  s.homepage         = 'https://ivoca.io'
   s.license          = { :file => '../LICENSE' }
   s.author           = { 'Your Company' => 'email@example.com' }
   s.source           = { :path => '.' }
   s.source_files = 'Classes/**/*'
   s.dependency 'Flutter'
   s.dependency 'Google-Mobile-Ads-SDK'
+  s.ios.deployment_target = '8.0'
+  s.static_framework = true
   s.platform = :ios, '8.0'
 
   # Flutter.framework does not contain a i386 slice.
