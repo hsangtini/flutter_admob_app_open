@@ -5,7 +5,7 @@ Flutter bridge to Admob App Open Beta.
 
 Supports using Admob App Open Beta.
 
-<img src="https://developers.google.com/admob/images/app-open-ad.png" alt="drawing" height="200"/>
+<img src="https://developers.google.com/admob/images/app-open-ad.png" alt="drawing" height="400"/>
 
 ## Supported platforms
 
