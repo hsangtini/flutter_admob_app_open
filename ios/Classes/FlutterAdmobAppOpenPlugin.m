@@ -45,7 +45,6 @@
 - (void)requestAppOpenAd {
 
     NSString *appAppOpenAdUnitId = (NSString *) self.appAppOpenAdUnitId;
-    NSLog(@"%@", appAppOpenAdUnitId);
     
     if(appAppOpenAdUnitId == nil) {
         return;
