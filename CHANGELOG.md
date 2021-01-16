@@ -1,3 +1,7 @@
+## 0.0.6
+
+* Update admob package
+
 ## 0.0.5
 
 * Support MobileAdTargetingInfo from firebase_admob. You can use MobileAdTargetingInfo to target adslike keywords, childDirected, testDevices, ...
