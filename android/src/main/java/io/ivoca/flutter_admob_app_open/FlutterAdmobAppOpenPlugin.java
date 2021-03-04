@@ -33,6 +33,11 @@ public class FlutterAdmobAppOpenPlugin implements FlutterPlugin, MethodCallHandl
   private AppOpenManager appOpenManager;
 
   private static boolean hasAppOpenManager = false;
+  private static boolean _pause = false;
+
+  public static boolean getPause() {
+    return _pause;
+  }
 
   @Override
   public void onAttachedToEngine(@NonNull FlutterPluginBinding flutterPluginBinding) {
@@ -54,13 +59,25 @@ public class FlutterAdmobAppOpenPlugin implements FlutterPlugin, MethodCallHandl
 
       String appAppOpenAdUnitId = call.argument("appAppOpenAdUnitId");
       final Map<String, Object> targetingInfo = call.argument("targetingInfo");
-      
+
       MobileAds.initialize(applicationContext, appId);
 
       if(appAppOpenAdUnitId != null && appOpenManager == null && !hasAppOpenManager) {
         this.appOpenManager = new AppOpenManager((Application) applicationContext, appAppOpenAdUnitId, targetingInfo);
         hasAppOpenManager = true;
       }
+
+      result.success(Boolean.TRUE);
+
+    } else if (call.method.equals("pause")) {
+
+      _pause = true;
+
+      result.success(Boolean.TRUE);
+
+    } else if (call.method.equals("resume")) {
+
+      _pause = false;
 
       result.success(Boolean.TRUE);
 

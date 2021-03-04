@@ -135,33 +135,35 @@ public class AppOpenManager implements LifecycleObserver,Application.ActivityLif
     public void showAdIfAvailable() {
         // Only show ad if there is not already an app open ad currently showing
         // and an ad is available.
-        if (!isShowingAd && isAdAvailable()) {
-            Log.d(LOG_TAG, "Will show ad.");
+        if(!FlutterAdmobAppOpenPlugin.getPause()){
+            if (!isShowingAd && isAdAvailable()) {
+                Log.d(LOG_TAG, "Will show ad.");
 
-            FullScreenContentCallback fullScreenContentCallback =
-                    new FullScreenContentCallback() {
-                        @Override
-                        public void onAdDismissedFullScreenContent() {
-                            // Set the reference to null so isAdAvailable() returns false.
-                            AppOpenManager.this.appOpenAd = null;
-                            isShowingAd = false;
-                            fetchAd();
-                        }
+                FullScreenContentCallback fullScreenContentCallback =
+                        new FullScreenContentCallback() {
+                            @Override
+                            public void onAdDismissedFullScreenContent() {
+                                // Set the reference to null so isAdAvailable() returns false.
+                                AppOpenManager.this.appOpenAd = null;
+                                isShowingAd = false;
+                                fetchAd();
+                            }
 
-                        @Override
-                        public void onAdFailedToShowFullScreenContent(AdError adError) {}
+                            @Override
+                            public void onAdFailedToShowFullScreenContent(AdError adError) {}
 
-                        @Override
-                        public void onAdShowedFullScreenContent() {
-                            isShowingAd = true;
-                        }
-                    };
+                            @Override
+                            public void onAdShowedFullScreenContent() {
+                                isShowingAd = true;
+                            }
+                        };
 
-            appOpenAd.show(currentActivity, fullScreenContentCallback);
+                appOpenAd.show(currentActivity, fullScreenContentCallback);
 
-        } else {
-            Log.d(LOG_TAG, "Can not show ad.");
-            fetchAd();
+            } else {
+                Log.d(LOG_TAG, "Can not show ad.");
+                fetchAd();
+            }
         }
     }
 

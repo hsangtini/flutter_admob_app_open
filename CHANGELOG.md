@@ -1,3 +1,19 @@
+## 1.0.0
+
+* [BREAKING] We now support flutter version 2.0 (null-safety), check out the [migration guide](https://dart.dev/null-safety/migration-guide).
+* [BREAKING] Remove MobileAdTargetingInfo from firebase_admob because it will be deprecated in April 2021 (https://github.com/FirebaseExtended/flutterfire/tree/master/packages/firebase_admob).
+* [BREAKING] Write new AdRequestAppOpen base from AdRequest from google_mobile_ads (https://pub.dev/packages/google_mobile_ads).
+
+* Support pause and resume like that:
+```dart
+if (condition) {
+  FlutterAdmobAppOpen.instance.pause();
+} else {
+  FlutterAdmobAppOpen.instance.resume();
+}
+myRewardedAd.load();
+```
+
 ## 0.0.6
 
 * Update admob package

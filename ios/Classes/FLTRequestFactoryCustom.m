@@ -80,46 +80,6 @@
     request.contentURL = contentURL;
   }
 
-  NSObject *birthday = _targetingInfo[@"birthday"];
-  if (birthday != NULL) {
-    if (![birthday isKindOfClass:[NSNumber class]]) {
-      NSLog(@"targeting info birthday: expected a long integer (MobileAd %@)", self);
-    } else {
-      // Incoming time value is milliseconds since the epoch, NSDate uses
-      // seconds.
-      request.birthday =
-          [NSDate dateWithTimeIntervalSince1970:((NSNumber *)birthday).longValue / 1000.0];
-    }
-  }
-
-  NSObject *gender = _targetingInfo[@"gender"];
-  if (gender != NULL) {
-    if (![gender isKindOfClass:[NSNumber class]]) {
-      NSLog(@"targeting info gender: expected an integer (MobileAd %@)", self);
-    } else {
-      int genderValue = ((NSNumber *)gender).intValue;
-      switch (genderValue) {
-        case 0:  // MobileAdGender.unknown
-        case 1:  // MobileAdGender.male
-        case 2:  // MobileAdGender.female
-          request.gender = genderValue;
-          break;
-        default:
-          NSLog(@"targeting info gender: not one of 0, 1, or 2 (MobileAd %@)", self);
-      }
-    }
-  }
-
-  NSNumber *childDirected = [self targetingInfoBoolForKey:@"childDirected" info:_targetingInfo];
-  if (childDirected != nil) {
-    [request tagForChildDirectedTreatment:childDirected.boolValue];
-  }
-
-  NSString *requestAgent = [self targetingInfoStringForKey:@"requestAgent" info:_targetingInfo];
-  if (requestAgent != nil) {
-    request.requestAgent = requestAgent;
-  }
-
   NSNumber *nonPersonalizedAds = [self targetingInfoBoolForKey:@"nonPersonalizedAds"
                                                           info:_targetingInfo];
   if (nonPersonalizedAds != nil && [nonPersonalizedAds boolValue]) {

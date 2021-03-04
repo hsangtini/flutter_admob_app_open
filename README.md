@@ -55,15 +55,12 @@ void main() async {
   /// Replace your admob app open ad unit id
   final appAppOpenAdUnitId = FlutterAdmobAppOpen.testAppOpenAdId;
 
-  MobileAdTargetingInfo targetingInfo = MobileAdTargetingInfo(
-    keywords: <String>['flutterio', 'beautiful apps'],
-    contentUrl: 'https://flutter.io',
-    birthday: DateTime.now(),
-    childDirected: false,
-    designedForFamilies: false,
-    gender: MobileAdGender.male, // or MobileAdGender.female, MobileAdGender.unknown
-    testDevices: <String>[], // Android emulators are considered test devices
-  );
+   AdRequestAppOpen targetingInfo = AdRequestAppOpen(
+      keywords: <String>['flutterio', 'beautiful apps'],
+      contentUrl: 'https://flutter.io',
+      testDevices: <String>[], // Android emulators are considered test devices
+      nonPersonalizedAds: true,
+    );
 
   await FlutterAdmobAppOpen.instance.initialize(
     appId: admobAppId,

@@ -8,6 +8,7 @@
 @property(nonatomic, retain) NSString *appId;
 @property(nonatomic, retain) NSString *appAppOpenAdUnitId;
 @property(nonatomic, retain) NSDictionary *targetingInfo;
+@property(nonatomic, retain) BOOL *pause;
 
 
 - (void)requestAppOpenAd;
