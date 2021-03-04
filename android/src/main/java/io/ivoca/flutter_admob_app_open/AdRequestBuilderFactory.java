@@ -88,37 +88,6 @@ class AdRequestBuilderFactory {
     String contentUrl = getTargetingInfoString("contentUrl", targetingInfo.get("contentUrl"));
     if (contentUrl != null) builder.setContentUrl(contentUrl);
 
-    Object birthday = targetingInfo.get("birthday");
-    if (birthday != null) {
-      if (!(birthday instanceof Long))
-        Log.w(TAG, "targetingInfo birthday: expected a long integer");
-      else builder.setBirthday(new Date((Long) birthday));
-    }
-
-    Integer gender = getTargetingInfoInteger("gender", targetingInfo.get("gender"));
-    if (gender != null) {
-      switch (gender) {
-        case 0: // MobileAdGender.unknown
-        case 1: // MobileAdGender.male
-        case 2: // MobileAdGender.female
-          builder.setGender(gender);
-          break;
-        default:
-          Log.w(TAG, "targetingInfo gender: invalid value");
-      }
-    }
-
-    Boolean designedForFamilies =
-        getTargetingInfoBoolean("designedForFamilies", targetingInfo.get("designedForFamilies"));
-    if (designedForFamilies != null) builder.setIsDesignedForFamilies(designedForFamilies);
-
-    Boolean childDirected =
-        getTargetingInfoBoolean("childDirected", targetingInfo.get("childDirected"));
-    if (childDirected != null) builder.tagForChildDirectedTreatment(childDirected);
-
-    String requestAgent = getTargetingInfoString("requestAgent", targetingInfo.get("requestAgent"));
-    if (requestAgent != null) builder.setRequestAgent(requestAgent);
-
     Boolean nonPersonalizedAds =
         getTargetingInfoBoolean("nonPersonalizedAds", targetingInfo.get("nonPersonalizedAds"));
     if (nonPersonalizedAds != null && nonPersonalizedAds) {

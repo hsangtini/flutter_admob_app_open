@@ -20,22 +20,33 @@
         result([@"iOS "
                 stringByAppendingString:[[UIDevice currentDevice] systemVersion]]);
     } else if ([@"initialize" isEqualToString:call.method]) {
-       
+
         NSString *appId = (NSString *)call.arguments[@"appId"];
         NSString *appAppOpenAdUnitId = (NSString *)call.arguments[@"appAppOpenAdUnitId"];
         NSDictionary *targetingInfo = (NSDictionary *)call.arguments[@"targetingInfo"];
-        
-        
+
+
         self.appId = appId;
         self.appAppOpenAdUnitId = appAppOpenAdUnitId;
         self.targetingInfo = targetingInfo;
-        
+        self.pause = NO;
+
         if (appId == nil || [appId  isEqual: @""]) {
             result([FlutterError errorWithCode:@"no_app_id" message:@"a null or empty AdMob appId was provided" details:nil]);
             return;
         }
         [GADMobileAds configureWithApplicationID:appId];
         [self requestAppOpenAd];
+        result([NSNumber numberWithBool:YES]);
+    }else if ([@"pause" isEqualToString:call.method]) {
+
+        self.pause = YES;
+
+        result([NSNumber numberWithBool:YES]);
+    }else if ([@"resume" isEqualToString:call.method]) {
+
+        self.pause = NO;
+
         result([NSNumber numberWithBool:YES]);
     } else {
         result(FlutterMethodNotImplemented);
@@ -102,16 +113,18 @@
 }
 
 - (void)tryToPresentAd:(UIWindow *)window {
-  GADAppOpenAd *ad = self.appOpenAd;
-  self.appOpenAd = nil;
-  if (ad && [self wasLoadTimeLessThanNHoursAgo:4]) {
-    UIViewController *rootController = window.rootViewController;
-    [ad presentFromRootViewController:rootController];
+    if(self.pause == NO) {
+          GADAppOpenAd *ad = self.appOpenAd;
+          self.appOpenAd = nil;
+          if (ad && [self wasLoadTimeLessThanNHoursAgo:4]) {
+            UIViewController *rootController = window.rootViewController;
+            [ad presentFromRootViewController:rootController];
 
-  } else {
-    // If you don't have an ad ready, request one.
-    [self requestAppOpenAd];
-  }
+          } else {
+            // If you don't have an ad ready, request one.
+            [self requestAppOpenAd];
+          }
+    }
 }
 
 @end
