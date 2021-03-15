@@ -15,7 +15,6 @@ if (condition) {
 } else {
   FlutterAdmobAppOpen.instance.resume();
 }
-myRewardedAd.load();
 ```
 
 ## 0.0.6
