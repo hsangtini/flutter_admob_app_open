@@ -1,3 +1,7 @@
+## 1.0.1
+
+* Fixed typo iOs, sorry :(
+
 ## 1.0.0
 
 * [BREAKING] We now support flutter version 2.0 (null-safety), check out the [migration guide](https://dart.dev/null-safety/migration-guide).
