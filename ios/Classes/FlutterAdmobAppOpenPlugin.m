@@ -35,7 +35,7 @@
             result([FlutterError errorWithCode:@"no_app_id" message:@"a null or empty AdMob appId was provided" details:nil]);
             return;
         }
-        [GADMobileAds configureWithApplicationID:appId];
+        [[GADMobileAds sharedInstance] startWithCompletionHandler:nil];
         [self requestAppOpenAd];
         result([NSNumber numberWithBool:YES]);
     }else if ([@"pause" isEqualToString:call.method]) {
