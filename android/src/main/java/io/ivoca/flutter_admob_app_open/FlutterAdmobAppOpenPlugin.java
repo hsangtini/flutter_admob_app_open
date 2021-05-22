@@ -4,11 +4,14 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 
 import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.ads.RequestConfiguration;
+import com.google.android.gms.ads.initialization.InitializationStatus;
+import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 
 import java.util.List;
 import java.util.Map;
@@ -62,7 +65,12 @@ public class FlutterAdmobAppOpenPlugin implements FlutterPlugin, MethodCallHandl
       String appAppOpenAdUnitId = call.argument("appAppOpenAdUnitId");
       final Map<String, Object> targetingInfo = call.argument("targetingInfo");
 
-      MobileAds.initialize(applicationContext, appId);
+      MobileAds.initialize(applicationContext, new OnInitializationCompleteListener() {
+        @Override
+        public void onInitializationComplete(@NonNull InitializationStatus initializationStatus) {
+          Log.d("AdmobAppOpenPlugin", "Ads Initialization complete.");
+        }
+      });
 
       if (appAppOpenAdUnitId != null && appOpenManager == null && !hasAppOpenManager) {
         this.appOpenManager = new AppOpenManager((Application) applicationContext, appAppOpenAdUnitId, targetingInfo);
