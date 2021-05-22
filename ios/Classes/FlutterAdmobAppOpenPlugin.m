@@ -50,6 +50,8 @@
         result([NSNumber numberWithBool:YES]);
     } else if ([@"setTestDevices" isEqualToString:call.method]) {
        GADMobileAds.sharedInstance.requestConfiguration.testDeviceIdentifiers = call.arguments;
+       
+       result([NSNumber numberWithBool:YES]);
     } else {
         result(FlutterMethodNotImplemented);
     }

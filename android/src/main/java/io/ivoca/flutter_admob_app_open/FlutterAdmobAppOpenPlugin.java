@@ -8,7 +8,9 @@ import android.content.Context;
 import androidx.annotation.NonNull;
 
 import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.RequestConfiguration;
 
+import java.util.List;
 import java.util.Map;
 
 import io.flutter.embedding.engine.plugins.FlutterPlugin;
@@ -62,7 +64,7 @@ public class FlutterAdmobAppOpenPlugin implements FlutterPlugin, MethodCallHandl
 
       MobileAds.initialize(applicationContext, appId);
 
-      if(appAppOpenAdUnitId != null && appOpenManager == null && !hasAppOpenManager) {
+      if (appAppOpenAdUnitId != null && appOpenManager == null && !hasAppOpenManager) {
         this.appOpenManager = new AppOpenManager((Application) applicationContext, appAppOpenAdUnitId, targetingInfo);
         hasAppOpenManager = true;
       }
@@ -81,6 +83,14 @@ public class FlutterAdmobAppOpenPlugin implements FlutterPlugin, MethodCallHandl
 
       result.success(Boolean.TRUE);
 
+    } else if (call.method.equals("resume")) {
+
+      List<String> testDeviceIds = (List<String>) call.arguments;
+      RequestConfiguration configuration =
+              new RequestConfiguration.Builder().setTestDeviceIds(testDeviceIds).build();
+      MobileAds.setRequestConfiguration(configuration);
+
+      result.success(Boolean.TRUE);
     } else {
       result.notImplemented();
     }
