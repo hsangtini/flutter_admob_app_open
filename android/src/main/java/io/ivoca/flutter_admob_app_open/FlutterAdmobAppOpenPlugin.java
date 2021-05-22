@@ -83,7 +83,7 @@ public class FlutterAdmobAppOpenPlugin implements FlutterPlugin, MethodCallHandl
 
       result.success(Boolean.TRUE);
 
-    } else if (call.method.equals("resume")) {
+    } else if (call.method.equals("setTestDevices")) {
 
       List<String> testDeviceIds = (List<String>) call.arguments;
       RequestConfiguration configuration =
