@@ -48,6 +48,8 @@
         self.pause = NO;
 
         result([NSNumber numberWithBool:YES]);
+    } else if ([@"setTestDevices" isEqualToString:call.method]) {
+       GADMobileAds.sharedInstance.requestConfiguration.testDeviceIdentifiers = call.arguments;
     } else {
         result(FlutterMethodNotImplemented);
     }
