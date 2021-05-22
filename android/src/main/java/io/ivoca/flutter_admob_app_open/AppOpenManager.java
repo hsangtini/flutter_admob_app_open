@@ -5,6 +5,7 @@ import android.app.Application;
 import android.os.Bundle;
 import android.util.Log;
 
+import androidx.annotation.NonNull;
 import androidx.lifecycle.LifecycleObserver;
 import androidx.lifecycle.OnLifecycleEvent;
 import androidx.lifecycle.ProcessLifecycleOwner;
@@ -73,7 +74,7 @@ public class AppOpenManager implements LifecycleObserver,Application.ActivityLif
                      * @param ad the loaded app open ad.
                      */
                     @Override
-                    public void onAppOpenAdLoaded(AppOpenAd ad) {
+                    public void onAdLoaded(@NonNull AppOpenAd ad) {
                         AppOpenManager.this.appOpenAd = ad;
                         AppOpenManager.this.loadTime = (new Date()).getTime();
                     }
@@ -83,11 +84,9 @@ public class AppOpenManager implements LifecycleObserver,Application.ActivityLif
                      *
                      * @param loadAdError the error.
                      */
-                    @Override
-                    public void onAppOpenAdFailedToLoad(LoadAdError loadAdError) {
+                    public void onAdFailedToLoad(@NonNull LoadAdError loadAdError) {
                         // Handle the error.
                     }
-
                 };
         AdRequest request = getAdRequest();
         AppOpenAd.load(
@@ -158,7 +157,8 @@ public class AppOpenManager implements LifecycleObserver,Application.ActivityLif
                             }
                         };
 
-                appOpenAd.show(currentActivity, fullScreenContentCallback);
+                appOpenAd.setFullScreenContentCallback(fullScreenContentCallback);
+                appOpenAd.show(currentActivity);
 
             } else {
                 Log.d(LOG_TAG, "Can not show ad.");

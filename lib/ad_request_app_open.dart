@@ -7,7 +7,6 @@ class AdRequestAppOpen {
   const AdRequestAppOpen({
     this.keywords,
     this.contentUrl,
-    this.testDevices,
     this.nonPersonalizedAds,
   });
 
@@ -18,13 +17,6 @@ class AdRequestAppOpen {
   ///
   /// This webpage content is used for targeting and brand safety purposes.
   final String? contentUrl;
-
-  /// Causes a device to receive test ads.
-  ///
-  /// The deviceId can be obtained by viewing the logcat output after creating a
-  /// new ad. This method should only be used while debugging. Be sure to remove
-  /// all calls to this method before releasing your app.
-  final List<String>? testDevices;
 
   /// Non-personalized ads are ads that are not based on a user’s past behavior.
   ///
@@ -45,18 +37,13 @@ class AdRequestAppOpen {
       json['nonPersonalizedAds'] = nonPersonalizedAds;
     if (contentUrl != null && contentUrl!.isNotEmpty)
       json['contentUrl'] = contentUrl;
-    if (testDevices != null && testDevices!.isNotEmpty) {
-      assert(testDevices!.every((String s) => s.isNotEmpty));
-      json['testDevices'] = testDevices;
-    }
 
     return json;
   }
 
-  factory AdRequestAppOpen.fromJson(Map<String, dynamic> json){
+  factory AdRequestAppOpen.fromJson(Map<String, dynamic> json) {
     return AdRequestAppOpen(
       keywords: json['keywords'] ?? [],
-      testDevices: json['testDevices'] ?? [],
       nonPersonalizedAds: json['nonPersonalizedAds'],
       contentUrl: json['contentUrl'],
     );
