@@ -53,6 +53,11 @@ class FlutterAdmobAppOpen {
     return _channel.invokeMethod<bool>('resume');
   }
 
+  /// Causes a device to receive test ads.
+  ///
+  /// The deviceId can be obtained by viewing the logcat output after creating a
+  /// new ad. This method should only be used while debugging. Be sure to remove
+  /// all calls to this method before releasing your app.
   Future<bool?> setTestDevices(List<String> testDevices) {
     return _channel.invokeMethod<bool>('setTestDevices', testDevices);
   }
