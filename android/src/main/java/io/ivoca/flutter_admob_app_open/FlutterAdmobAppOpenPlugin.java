@@ -51,16 +51,16 @@ public class FlutterAdmobAppOpenPlugin implements FlutterPlugin, MethodCallHandl
   public void onMethodCall(@NonNull MethodCall call, @NonNull Result result) {
     if (call.method.equals("initialize")) {
 
-      String appId = call.argument("appId");
-      if (appId == null || appId.isEmpty()) {
-        result.error("no_app_id", "a null or empty AdMob appId was provided", null);
-        return;
-      }
+//      String appId = call.argument("appId");
+//      if (appId == null || appId.isEmpty()) {
+//        result.error("no_app_id", "a null or empty AdMob appId was provided", null);
+//        return;
+//      }
 
       String appAppOpenAdUnitId = call.argument("appAppOpenAdUnitId");
       final Map<String, Object> targetingInfo = call.argument("targetingInfo");
 
-      MobileAds.initialize(applicationContext, appId);
+      MobileAds.initialize(applicationContext);
 
       if(appAppOpenAdUnitId != null && appOpenManager == null && !hasAppOpenManager) {
         this.appOpenManager = new AppOpenManager((Application) applicationContext, appAppOpenAdUnitId, targetingInfo);

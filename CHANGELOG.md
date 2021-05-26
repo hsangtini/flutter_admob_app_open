@@ -1,4 +1,8 @@
 ## 1.0.3
+
+* Working with updated google_mobile_ads (https://pub.dev/packages/google_mobile_ads).
+
+## 1.0.3
 ## 1.0.2
 ## 1.0.1
 
