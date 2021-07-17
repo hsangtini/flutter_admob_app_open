@@ -65,10 +65,10 @@
     return request;
   }
 
-  NSArray *testDevices = [self targetingInfoArrayForKey:@"testDevices" info:_targetingInfo];
-  if (testDevices != nil) {
-    request.testDevices = testDevices;
-  }
+//  NSArray *testDevices = [self targetingInfoArrayForKey:@"testDevices" info:_targetingInfo];
+//  if (testDevices != nil) {
+//    request.testDevices = testDevices;
+//  }
 
   NSArray *keywords = [self targetingInfoArrayForKey:@"keywords" info:_targetingInfo];
   if (keywords != nil) {

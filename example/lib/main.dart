@@ -14,7 +14,6 @@ void main() async {
   AdRequestAppOpen targetingInfo = AdRequestAppOpen(
     keywords: <String>['flutterio', 'beautiful apps'],
     contentUrl: 'https://flutter.io',
-    testDevices: <String>[], // Android emulators are considered test devices
     nonPersonalizedAds: true,
   );
 

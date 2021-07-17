@@ -69,13 +69,13 @@ class AdRequestBuilderFactory {
     AdRequest.Builder builder = new AdRequest.Builder();
     if (targetingInfo == null) return builder;
 
-    List testDevices = getTargetingInfoArrayList("testDevices", targetingInfo.get("testDevices"));
-    if (testDevices != null) {
-      for (Object deviceValue : testDevices) {
-        String device = getTargetingInfoString("testDevices element", deviceValue);
-        if (device != null) builder.addTestDevice(device);
-      }
-    }
+//    List testDevices = getTargetingInfoArrayList("testDevices", targetingInfo.get("testDevices"));
+//    if (testDevices != null) {
+//      for (Object deviceValue : testDevices) {
+//        String device = getTargetingInfoString("testDevices element", deviceValue);
+//        if (device != null) builder.addTestDevice(device);
+//      }
+//    }
 
     List keywords = getTargetingInfoArrayList("keywords", targetingInfo.get("keywords"));
     if (keywords != null) {

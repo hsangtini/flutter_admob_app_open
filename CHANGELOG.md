@@ -1,3 +1,7 @@
+## 1.0.5
+
+* Fixed error about testDevices.
+
 ## 1.0.3
 
 * Working with updated google_mobile_ads (https://pub.dev/packages/google_mobile_ads).
