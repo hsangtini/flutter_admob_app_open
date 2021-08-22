@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_admob_app_open/flutter_admob_app_open.dart';
 
 void main() async {
-
   WidgetsFlutterBinding.ensureInitialized();
 
   /// Replace your admob app ID
@@ -21,6 +20,10 @@ void main() async {
     appId: admobAppId,
     appAppOpenAdUnitId: appAppOpenAdUnitId,
     targetingInfo: targetingInfo,
+  );
+
+  await FlutterAdmobAppOpen.instance.setTestDevices(
+    <String>[],
   );
 
   runApp(MyApp());

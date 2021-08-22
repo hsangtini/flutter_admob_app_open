@@ -11,13 +11,18 @@ class FlutterAdmobAppOpen {
 
   static FlutterAdmobAppOpen get instance => _instance;
 
-  static const MethodChannel _channel = const MethodChannel('flutter_admob_app_open');
+  static const MethodChannel _channel =
+      const MethodChannel('flutter_admob_app_open');
 
   /// {@macro firebase_admob.testAdUnitId}
-  static final String testAppId = Platform.isAndroid ? 'ca-app-pub-3940256099942544~3347511713' : 'ca-app-pub-3940256099942544~1458002511';
+  static final String testAppId = Platform.isAndroid
+      ? 'ca-app-pub-3940256099942544~3347511713'
+      : 'ca-app-pub-3940256099942544~1458002511';
 
   /// {@macro firebase_admob.testAdUnitId}
-  static final String testAppOpenAdId = Platform.isAndroid ? 'ca-app-pub-3940256099942544/1033173712' : 'ca-app-pub-3940256099942544/5662855259';
+  static final String testAppOpenAdId = Platform.isAndroid
+      ? 'ca-app-pub-3940256099942544/1033173712'
+      : 'ca-app-pub-3940256099942544/5662855259';
 
   FlutterAdmobAppOpen._();
 
@@ -45,5 +50,14 @@ class FlutterAdmobAppOpen {
 
   Future<bool?> resume() {
     return _channel.invokeMethod<bool>('resume');
+  }
+
+  /// Causes a device to receive test ads.
+  ///
+  /// The deviceId can be obtained by viewing the logcat output after creating a
+  /// new ad. This method should only be used while debugging. Be sure to remove
+  /// all calls to this method before releasing your app.
+  Future<bool?> setTestDevices(List<String> testDevices) {
+    return _channel.invokeMethod<bool>('setTestDevices', testDevices);
   }
 }

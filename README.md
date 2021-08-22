@@ -61,11 +61,17 @@ void main() async {
       nonPersonalizedAds: true,
     );
 
+
   await FlutterAdmobAppOpen.instance.initialize(
     appId: admobAppId,
     appAppOpenAdUnitId: appAppOpenAdUnitId,
     targetingInfo: targetingInfo,
   );
+
+  await FlutterAdmobAppOpen.instance.setTestDevices(
+    <String>[], // Android emulators are considered test devices
+  );
+
 
   runApp(MyApp());
 }
