@@ -55,11 +55,12 @@ void main() async {
   /// Replace your admob app open ad unit id
   final appAppOpenAdUnitId = FlutterAdmobAppOpen.testAppOpenAdId;
 
-  AdRequestAppOpen targetingInfo = AdRequestAppOpen(
-    keywords: <String>['flutterio', 'beautiful apps'],
-    contentUrl: 'https://flutter.io',
-    nonPersonalizedAds: true,
-  );
+   AdRequestAppOpen targetingInfo = AdRequestAppOpen(
+      keywords: <String>['flutterio', 'beautiful apps'],
+      contentUrl: 'https://flutter.io',
+      nonPersonalizedAds: true,
+    );
+
 
   await FlutterAdmobAppOpen.instance.initialize(
     appId: admobAppId,

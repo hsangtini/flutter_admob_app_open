@@ -29,11 +29,10 @@ class FlutterAdmobAppOpen {
   /// Initialize this plugin for the AdMob app specified by `appId`.
   /// If appAppOpenAdUnitId null, App Open ads will disable
   Future<bool?> initialize({
-    required String appId,
+    String? appId,
     String? appAppOpenAdUnitId,
     AdRequestAppOpen? targetingInfo,
   }) {
-    assert(appId.isNotEmpty);
 
     return _channel.invokeMethod<bool>(
       'initialize',

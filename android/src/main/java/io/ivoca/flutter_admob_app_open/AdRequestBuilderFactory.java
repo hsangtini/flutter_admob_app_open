@@ -69,6 +69,7 @@ class AdRequestBuilderFactory {
     AdRequest.Builder builder = new AdRequest.Builder();
     if (targetingInfo == null) return builder;
 
+
     List keywords = getTargetingInfoArrayList("keywords", targetingInfo.get("keywords"));
     if (keywords != null) {
       for (Object keywordValue : keywords) {
