@@ -21,21 +21,14 @@
                 stringByAppendingString:[[UIDevice currentDevice] systemVersion]]);
     } else if ([@"initialize" isEqualToString:call.method]) {
 
-        NSString *appId = (NSString *)call.arguments[@"appId"];
         NSString *appAppOpenAdUnitId = (NSString *)call.arguments[@"appAppOpenAdUnitId"];
         NSDictionary *targetingInfo = (NSDictionary *)call.arguments[@"targetingInfo"];
 
 
-        self.appId = appId;
         self.appAppOpenAdUnitId = appAppOpenAdUnitId;
         self.targetingInfo = targetingInfo;
         self.pause = NO;
 
-        if (appId == nil || [appId  isEqual: @""]) {
-            result([FlutterError errorWithCode:@"no_app_id" message:@"a null or empty AdMob appId was provided" details:nil]);
-            return;
-        }
-        [[GADMobileAds sharedInstance] startWithCompletionHandler:nil];
         [self requestAppOpenAd];
         result([NSNumber numberWithBool:YES]);
     }else if ([@"pause" isEqualToString:call.method]) {
@@ -48,10 +41,6 @@
         self.pause = NO;
 
         result([NSNumber numberWithBool:YES]);
-    } else if ([@"setTestDevices" isEqualToString:call.method]) {
-       GADMobileAds.sharedInstance.requestConfiguration.testDeviceIdentifiers = call.arguments;
-       
-       result([NSNumber numberWithBool:YES]);
     } else {
         result(FlutterMethodNotImplemented);
     }

@@ -15,7 +15,6 @@ Admob App Open ads for flutter
   s.source           = { :path => '.' }
   s.source_files = 'Classes/**/*'
   s.dependency 'Flutter'
-  s.dependency 'Google-Mobile-Ads-SDK'
   s.ios.deployment_target = '8.0'
   s.static_framework = true
   s.platform = :ios, '8.0'

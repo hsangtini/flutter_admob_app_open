@@ -46,30 +46,30 @@ See https://developers.google.com/admob/ios/quick-start#update_your_infoplist fo
 
 ```dart
 void main() async {
-
   WidgetsFlutterBinding.ensureInitialized();
-
-  /// Replace your admob app ID
-  final admobAppId = FlutterAdmobAppOpen.testAppId;
 
   /// Replace your admob app open ad unit id
   final appAppOpenAdUnitId = FlutterAdmobAppOpen.testAppOpenAdId;
 
-   AdRequestAppOpen targetingInfo = AdRequestAppOpen(
-      keywords: <String>['flutterio', 'beautiful apps'],
-      contentUrl: 'https://flutter.io',
-      nonPersonalizedAds: true,
+
+  /// Init MobileAds and more configs
+  await MobileAds.instance.initialize().then((value) {
+    MobileAds.instance.updateRequestConfiguration(
+      //Add more configs
+      RequestConfiguration(testDeviceIds: []),
     );
+  });
 
-
-  await FlutterAdmobAppOpen.instance.initialize(
-    appId: admobAppId,
-    appAppOpenAdUnitId: appAppOpenAdUnitId,
-    targetingInfo: targetingInfo,
+  AdRequestAppOpen targetingInfo = AdRequestAppOpen(
+    keywords: <String>['flutterio', 'beautiful apps'],
+    contentUrl: 'https://flutter.io',
+    nonPersonalizedAds: true,
   );
 
-  await FlutterAdmobAppOpen.instance.setTestDevices(
-    <String>[], // Android emulators are considered test devices
+  /// Init App Open Ads
+  await FlutterAdmobAppOpen.instance.initialize(
+    appAppOpenAdUnitId: appAppOpenAdUnitId,
+    targetingInfo: targetingInfo,
   );
 
 

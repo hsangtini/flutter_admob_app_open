@@ -1,14 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_admob_app_open/flutter_admob_app_open.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  /// Replace your admob app ID
-  final admobAppId = FlutterAdmobAppOpen.testAppId;
-
   /// Replace your admob app open ad unit id
   final appAppOpenAdUnitId = FlutterAdmobAppOpen.testAppOpenAdId;
+
+
+  /// Init MobileAds and more configs
+  await MobileAds.instance.initialize().then((value) {
+    MobileAds.instance.updateRequestConfiguration(
+      //Add more configs
+      RequestConfiguration(testDeviceIds: []),
+    );
+  });
 
   AdRequestAppOpen targetingInfo = AdRequestAppOpen(
     keywords: <String>['flutterio', 'beautiful apps'],
@@ -16,15 +23,12 @@ void main() async {
     nonPersonalizedAds: true,
   );
 
+  /// Init App Open Ads
   await FlutterAdmobAppOpen.instance.initialize(
-    appId: admobAppId,
     appAppOpenAdUnitId: appAppOpenAdUnitId,
     targetingInfo: targetingInfo,
   );
 
-  await FlutterAdmobAppOpen.instance.setTestDevices(
-    <String>[],
-  );
 
   runApp(MyApp());
 }

@@ -29,7 +29,6 @@ class FlutterAdmobAppOpen {
   /// Initialize this plugin for the AdMob app specified by `appId`.
   /// If appAppOpenAdUnitId null, App Open ads will disable
   Future<bool?> initialize({
-    String? appId,
     String? appAppOpenAdUnitId,
     AdRequestAppOpen? targetingInfo,
   }) {
@@ -37,7 +36,6 @@ class FlutterAdmobAppOpen {
     return _channel.invokeMethod<bool>(
       'initialize',
       <String, dynamic>{
-        'appId': appId,
         'appAppOpenAdUnitId': appAppOpenAdUnitId,
         'targetingInfo': targetingInfo?.toJson(),
       },
@@ -52,12 +50,4 @@ class FlutterAdmobAppOpen {
     return _channel.invokeMethod<bool>('resume');
   }
 
-  /// Causes a device to receive test ads.
-  ///
-  /// The deviceId can be obtained by viewing the logcat output after creating a
-  /// new ad. This method should only be used while debugging. Be sure to remove
-  /// all calls to this method before releasing your app.
-  Future<bool?> setTestDevices(List<String> testDevices) {
-    return _channel.invokeMethod<bool>('setTestDevices', testDevices);
-  }
 }

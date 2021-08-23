@@ -1,14 +1,17 @@
+## 1.1.0
+
+* dependencies google_mobile_ads (https://pub.dev/packages/google_mobile_ads) for the same.
+* Removed testDevices, using updateRequestConfiguration from google_mobile_ads (https://pub.dev/packages/google_mobile_ads)
+* Fix some errors.
+* Thank you mattcianna (github) for fixed PR.
+
 ## 1.0.5
 
-* Fixed error about testDevices.
+* Error version - don't using it !!! Upgrade to 1.1.0
 
 ## 1.0.3
 
 * Working with updated google_mobile_ads (https://pub.dev/packages/google_mobile_ads).
-
-## 1.0.3
-## 1.0.2
-## 1.0.1
 
 * Fixed typo iOs, sorry :(
 
