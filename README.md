@@ -1,5 +1,6 @@
-
 # Flutter Admob App Open
+
+[![pub package](https://img.shields.io/pub/v/flutter_admob_app_open.svg)](https://pub.dev/packages/flutter_admob_app_open)
 
 Flutter bridge to Admob App Open Beta.
 
