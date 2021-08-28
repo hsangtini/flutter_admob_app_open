@@ -78,6 +78,16 @@ void main() async {
 }
 ```
 
+## Pause and Resume
+
+```dart
+if (condition) {
+  FlutterAdmobAppOpen.instance.pause();
+} else {
+  FlutterAdmobAppOpen.instance.resume();
+}
+```
+
 ## Getting Started
 
 This project is a starting point for a Flutter
