@@ -1,3 +1,8 @@
+#Discontinued
+
+Project discontinued because google mobile ads has support App Open Ads. Please using google plugin.
+https://pub.dev/packages/google_mobile_ads
+
 ## 1.1.0
 
 * dependencies google_mobile_ads (https://pub.dev/packages/google_mobile_ads) for the same.
