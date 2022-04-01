@@ -2,10 +2,12 @@
 
 [![pub package](https://img.shields.io/pub/v/flutter_admob_app_open.svg)](https://pub.dev/packages/flutter_admob_app_open)
 
-#Discontinued
+# Discontinued
 
 Project discontinued because google mobile ads has support App Open Ads. Please using google plugin.
 https://pub.dev/packages/google_mobile_ads
+
+-----------
 
 Flutter bridge to Admob App Open Beta.
 
